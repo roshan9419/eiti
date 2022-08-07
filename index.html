@@ -24,6 +24,7 @@
     body {
         background-color: #efefef;
         font-family: Georgia, 'Times New Roman', Times, serif;
+        padding-inline: 20px;
     }
 
     /* HEADER START */
@@ -95,8 +96,76 @@
     nav ul li:hover .sub-menu {
         display: block;
     }
-
     /* HEADER END */
+
+    /* INTRODUCTION SECTION START */
+    #intro-section {
+        margin: 50px 20px;
+        padding: 0 20px 20px 20px;
+        border-radius: 20px;
+        border: 0.5px solid rgba(128, 128, 128, 0.301);
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.13);
+    }
+
+    #intro-section .title {
+        width: max-content;
+        margin: 0 auto;
+        padding: 5px 10px;
+        color: white;
+        background-color: var(--primary-color);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    #intro-section .row {
+        margin-top: 30px;
+        display: flex;
+    }
+
+    #intro-section .left-container {
+        flex: 1;
+        border-radius: 15px;
+        width: 50%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slider {
+        width: 100%;
+        display: inline-flex;
+        transition: 0.7s;
+    }
+
+    .slider img {
+        width: 100%;
+    }
+
+    .indicators {
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+    }
+
+    .indicators span {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+    }
+
+    .active-indicator {
+        background-color: white !important;
+    }
+
+    #intro-section .right-container {
+        flex: 1;
+        padding-left: 10px;
+        line-height: 2rem;
+    }
+    /* INTRODUCTION SECTION END */
 </style>
 
 <body>
@@ -135,6 +204,72 @@
             </ul>
         </nav>
     </header>
+
+    <section id="intro-section">
+        <h2 class="title">
+            E & ITI - AN INTRODUCTION
+        </h2>
+        <div class="row">
+            <div class="left-container">
+                <div class="slider">
+                    <img src="images/1.jpg" alt="">                    
+                    <img src="images/2.jpg" alt="">                    
+                    <img src="images/3.jpg" alt="">                    
+                    <img src="images/4.jpg" alt="">                    
+                </div>
+                <div class="indicators">
+                    <span class="active-indicator"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <p class="right-container">
+                Electrical & Instrument Training Institute ... 
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                Porro aliquid doloribus minus, nulla sunt ex veritatis, 
+                ratione voluptates neque, dolores est error! 
+                Nemo est temporibus sed! 
+                In excepturi amet officiis. <a href="#" style="text-decoration: none;">+ more</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Javascript -->
+    <script>
+        let sliders = document.getElementsByClassName("slider");
+        let indicators = document.getElementsByClassName("indicators");
+        let currentIndexes = [];
+
+        function onIndicatorBtnTap(evt, slider, indicators, sliderIdx, index = null) {
+            for (const btn of indicators.children) {
+                btn.classList.remove('active-indicator');
+            }
+
+            if (index !== null) {
+                indicators.children[index].classList.add('active-indicator');
+            } else {
+                index = [...evt.target.parentElement.children].indexOf(evt.target);
+                evt.target.classList.add('active-indicator');
+            }
+
+            currentIndexes[sliderIdx] = index;
+            slider.style.transform = `translateX(${index * -100}%)`;
+        }
+
+        for (let idx = 0; idx < sliders.length; idx++) {
+            currentIndexes.push(0);
+            for (let btn of indicators[idx].children) {
+                btn.onclick = evt => onIndicatorBtnTap(evt, sliders[idx], indicators[idx], idx);
+            }
+            setInterval(function () {
+                onIndicatorBtnTap(null, sliders[idx], indicators[idx], idx, currentIndexes[idx]);
+                currentIndexes[idx]++;
+                if (currentIndexes[idx] === indicators[idx].children.length)
+                    currentIndexes[idx] = 0;
+            }, 2000);
+        }
+    </script>
 
 </body>
 
