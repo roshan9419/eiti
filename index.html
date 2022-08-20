@@ -288,16 +288,16 @@
         box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.9);
     }
 
-    #notice ul,
-    #advisory ul {
+    #notice ul li,
+    #advisory ul li {
         list-style: none;
-        line-height: 25px;
+        margin-bottom: 10px;
     }
 
-    #notice span,
-    #advisory span {
+    #notice .jet-bullet-icon,
+    #advisory .jet-bullet-icon {
         margin-right: 6px;
-        font-weight: bolder;
+        width: 16px;
     }
 
     /* ACHIVEMENTS NOTICE ADVISORY END */
@@ -318,7 +318,7 @@
 
     .missile-container {
         width: 100%;
-        /* z-index: 2; */
+        z-index: 0;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -328,7 +328,6 @@
 
     .missile {
         width: 300px;
-        /* background-color: rebeccapurple; */
         transform: scaleX(-1);
         margin-left: -50px;
         transition: 0.3s ease-in-out;
@@ -351,6 +350,7 @@
             linear-gradient(45deg, #585c5f, #A8A9AD) border-box;
         border: 35px solid transparent;
         box-sizing: border-box;
+        z-index: 10;
     }
 
     .gyro-ring::before,
@@ -424,6 +424,7 @@
         display: flex;
         flex-direction: column;
         gap: 60px;
+        z-index: 10;
         position: absolute;
     }
 
@@ -433,8 +434,12 @@
         color: white;
         border-radius: 10px;
         padding: 10px 30px;
-        z-index: 10;
         text-align: center;
+        transition: 0.3s ease-in-out;
+    }
+
+    .gyro-btn:hover {
+        background-color: var(--secondary-color);
     }
 
     /* RING 1 BUTTONS */
@@ -490,10 +495,15 @@
     /* EXTRAS SECTION START */
     #extras-section {
         min-height: 100vh;
-        padding: 150px 200px;
+        padding: 150px;
         display: flex;
         justify-content: center;
-        column-gap: 100px;
+        column-gap: 80px;
+    }
+
+    .extra-item {
+        box-shadow: var(--inner-box-shadow);
+        padding: 30px 50px;
     }
 
     .extra-item .title {
@@ -669,29 +679,31 @@
         <div id="notice">
             <h4 class="title">Notice</h4>
             <ul>
-                <li><span>&#65310;</span>Lorem lum ereditaeriores voluptates provident saepe...<a href="#"
-                        style="text-decoration: none;">+ more...</a></li>
-                <li><span>&#65310;</span>Lorem que consectetur fugit unde officiantium exercitationem quis quidem
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem lum ereditaeriores voluptates provident
+                    saepe...<a href="#" style="text-decoration: none;">+ more...</a></li>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem que consectetur fugit unde officiantium
+                    exercitationem quis quidem
                     asperiores voluptates provident saepe...<a href="#" style="text-decoration: none;">+ more</a></li>
-                <li><span>&#65310;</span>Lorem elit. Neque consectetur fugit undmus laudantium exercitationem quis
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem elit. Neque consectetur fugit undmus
+                    laudantium exercitationem quis
                     quidem asperiores voluptates provident saepe...<a href="#" style="text-decoration: none;">+ more</a>
                 </li>
-                <li><span>&#65310;</span>Lorem cia ill asperiores voluptates provident saepe...<a href="#"
-                        style="text-decoration: none;">+ more</a></li>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem cia ill asperiores voluptates provident
+                    saepe...<a href="#" style="text-decoration: none;">+ more</a></li>
             </ul>
         </div>
         <div id="advisory">
             <h4 class="title">IT Advisory</h4>
             <ul>
-                <li><span>&#65310;</span>Lorem lum ereditaeriores voluptates provident saepe...<a href="#"
-                        style="text-decoration: none;">+ more...</a></li>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem lum ereditaeriores voluptates provident
+                    saepe...<a href="#" style="text-decoration: none;">+ more...</a></li>
                 <li><span>&#65310;</span>Lorem elit. Neque consectetur fugit undmus laudantium exercitationem quis
                     quidem asperiores voluptates provident saepe...<a href="#" style="text-decoration: none;">+ more</a>
                 </li>
-                <li><span>&#65310;</span>Lorem cia ill asperiores voluptates provident saepe...<a href="#"
-                        style="text-decoration: none;">+ more</a></li>
-                <li><span>&#65310;</span>Lorem cia ill asperiores voluptates provident saepe...<a href="#"
-                        style="text-decoration: none;">+ more</a></li>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem cia ill asperiores voluptates provident
+                    saepe...<a href="#" style="text-decoration: none;">+ more</a></li>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem cia ill asperiores voluptates provident
+                    saepe...<a href="#" style="text-decoration: none;">+ more</a></li>
             </ul>
         </div>
     </section>
