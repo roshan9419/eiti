@@ -15,6 +15,7 @@
         --dark-color: #131313;
         --inner-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4),
             0 0 10px rgba(0, 0, 0, 0.3);
+        --page-color: #d8d8d8;
     }
 
     * {
@@ -24,7 +25,7 @@
     }
 
     body {
-        background-color: #d8d8d8;
+        background-color: var(--page-color);
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         /* padding-inline: 50px; */
     }
@@ -134,7 +135,7 @@
     /* INTRODUCTION SECTION START */
     .first-section {
         display: flex;
-        padding: 50px;
+        padding: 50px 100px;
         column-gap: 50px;
         margin-bottom: 100px;
     }
@@ -209,10 +210,13 @@
 
     #intro-section .left-container {
         flex: 2;
-        border-radius: 15px;
         width: 50%;
-        position: relative;
+    }
+
+    .slider-container {
         overflow: hidden;
+        position: relative;
+        border-radius: 20px;
     }
 
     .slider {
@@ -257,9 +261,9 @@
 
     /* ACHIVEMENTS NOTICE ADVISORY START */
     #ach-not-adv {
-        padding: 60px 40px;
+        padding: 60px 100px;
         display: flex;
-        column-gap: 20px;
+        column-gap: 30px;
         background-color: var(--primary-color);
     }
 
@@ -270,7 +274,7 @@
         border-radius: 20px;
         padding: 15px;
         box-shadow: var(--inner-box-shadow);
-        background-color: #d8d8d8;
+        background-color: var(--page-color);
     }
 
     #ach-not-adv .title {
@@ -278,12 +282,6 @@
         font-weight: bold;
         margin-bottom: 15px;
         font-size: 1.5rem;
-    }
-
-    .tv {
-        overflow: hidden;
-        position: relative;
-        border-radius: 20px;
     }
 
     #ach-not-adv .slider {
@@ -306,57 +304,120 @@
 
     /* GYROSCOPE START */
     #gyro-section {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .gyro-container {
         min-height: 100vh;
         position: relative;
-        padding: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
+    .missile-container {
+        width: 100%;
+        /* z-index: 2; */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .missile {
+        width: 300px;
+        /* background-color: rebeccapurple; */
+        transform: scaleX(-1);
+        margin-left: -50px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .missile:last-child {
+        transform: scaleX(1);
+        margin-right: -50px;
+    }
+
+    .missile:hover {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
     .gyro-ring {
         position: absolute;
         padding: 25px;
-        background: linear-gradient(#d8d8d8, #d8d8d8) padding-box,
+        background: linear-gradient(var(--page-color), var(--page-color)) padding-box,
             linear-gradient(45deg, #585c5f, #A8A9AD) border-box;
         border: 35px solid transparent;
         box-sizing: border-box;
     }
 
+    .gyro-ring::before,
+    .gyro-ring::after {
+        content: '';
+        position: absolute;
+        top: -35px;
+        background-color: var(--page-color);
+    }
+
     .gyro-ring:nth-child(1) {
-        width: 45vh;
+        width: 90vh;
         height: 90vh;
-        border-bottom-right-radius: 45vh;
-        border-top-right-radius: 45vh;
-        border-left: 0;
-        transform: translateX(150px);
+        border-radius: 45vh;
+        transform: translateX(0px);
+    }
+
+    .gyro-ring:nth-child(1)::before {
+        width: 42vh;
+        height: 90vh;
+        left: -35px;
     }
 
     .gyro-ring:nth-child(2) {
-        width: 35vh;
+        width: 70vh;
         height: 70vh;
-        border-bottom-left-radius: 35vh;
-        border-top-left-radius: 35vh;
+        border-radius: 35vh;
         border-right: 0;
-        transform: translateX(-135px);
+        transform: translateX(0px);
+    }
+
+    .gyro-ring:nth-child(2)::after {
+        width: 30vh;
+        height: 70vh;
+        right: 0px;
+        border-top-right-radius: 30vh;
+        border-bottom-right-radius: 30vh;
     }
 
     .gyro-ring:nth-child(3) {
-        width: 25vh;
+        width: 50vh;
         height: 50vh;
-        border-bottom-right-radius: 25vh;
-        border-top-right-radius: 25vh;
-        border-left: 0;
-        transform: translateX(80px);
+        border-radius: 25vh;
+        transform: translateX(0px);
+    }
+
+    .gyro-ring:nth-child(3)::before {
+        width: 22vh;
+        height: 50vh;
+        left: -35px;
+        border-top-left-radius: 22vh;
+        border-bottom-left-radius: 22vh;
     }
 
     .gyro-ring:nth-child(4) {
-        width: 15vh;
+        width: 30vh;
         height: 30vh;
-        border-bottom-left-radius: 15vh;
-        border-top-left-radius: 15vh;
-        border-right: 0;
-        transform: translateX(-65px);
+        border-radius: 15vh;
+        transform: translateX(0px);
+    }
+
+    .gyro-ring:nth-child(4)::after {
+        width: 12vh;
+        height: 30vh;
+        right: -40px;
+        border-top-right-radius: 12vh;
+        border-bottom-right-radius: 12vh;
     }
 
     .gyro-btns {
@@ -425,6 +486,88 @@
     }
 
     /* GYROSCOPE END */
+
+    /* EXTRAS SECTION START */
+    #extras-section {
+        min-height: 100vh;
+        padding: 150px 200px;
+        display: flex;
+        justify-content: center;
+        column-gap: 100px;
+    }
+
+    .extra-item .title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .bow-arrow {
+        width: 400px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        transform: translateY(-15px);
+    }
+
+    .extra-item ul {
+        margin-top: 25px;
+    }
+
+    .extra-item ul li {
+        list-style: none;
+        font-size: 1.3rem;
+        line-height: 35px;
+        margin-bottom: 10px;
+    }
+
+    .jet-bullet-icon {
+        width: 20px;
+        margin-right: 10px;
+    }
+
+    /* EXTRAS SECTION END */
+
+    /* FOOTER START */
+    footer {
+        background-color: var(--primary-color);
+        padding: 100px 150px;
+        color: white;
+    }
+
+    .footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-top h1 {
+        font-size: 3rem;
+        max-width: 60%;
+    }
+
+    .footer-top img {
+        height: 160px;
+    }
+
+    .footer-articles {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        column-gap: 100px;
+    }
+
+    footer article h2 {
+        margin-bottom: 10px;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    footer article p {
+        font-size: 1.2rem;
+        text-align: justify;
+        color: #c2c2c2;
+    }
+
+    /* FOOTER END */
 </style>
 
 <body>
@@ -471,7 +614,7 @@
                 E & ITI - AN INTRODUCTION
             </h2>
             <div class="row">
-                <div class="left-container">
+                <div class="left-container slider-container">
                     <div class="slider">
                         <img src="images/1.jpg" alt="">
                         <img src="images/2.jpg" alt="">
@@ -506,7 +649,7 @@
     <section id="ach-not-adv">
         <div id="achivements">
             <h4 class="title">Achievements</h4>
-            <div class="tv">
+            <div class="slider-container">
                 <div class="slider">
                     <img src="images/1.jpg" alt="">
                     <img src="images/2.jpg" alt="">
@@ -554,40 +697,132 @@
     </section>
 
     <section id="gyro-section">
-        <div class="gyro-ring"></div>
-        <div class="gyro-ring"></div>
-        <div class="gyro-ring"></div>
-        <div class="gyro-ring"></div>
-        <div class="gyro-btns gyro-ring1-btns">
-            <a href="#" class="gyro-btn">C/C++</a>
-            <a href="#" class="gyro-btn">Java</a>
-            <a href="#" class="gyro-btn">Python</a>
-            <a href="#" class="gyro-btn">Dart</a>
-            <a href="#" class="gyro-btn">Flutter</a>
-            <a href="#" class="gyro-btn">Kotlin</a>
-            <a href="#" class="gyro-btn">C#</a>
+        <div class="gyro-container">
+            <div class="gyro-ring"></div>
+            <div class="gyro-ring"></div>
+            <div class="gyro-ring"></div>
+            <div class="gyro-ring"></div>
+            <div class="gyro-btns gyro-ring1-btns">
+                <a href="#" class="gyro-btn">C/C++</a>
+                <a href="#" class="gyro-btn">Java</a>
+                <a href="#" class="gyro-btn">Python</a>
+                <a href="#" class="gyro-btn">Dart</a>
+                <a href="#" class="gyro-btn">Flutter</a>
+                <a href="#" class="gyro-btn">Kotlin</a>
+                <a href="#" class="gyro-btn">C#</a>
+            </div>
+            <div class="gyro-btns gyro-ring2-btns">
+                <a href="#" class="gyro-btn">Go</a>
+                <a href="#" class="gyro-btn">React</a>
+                <a href="#" class="gyro-btn">Ang.</a>
+                <a href="#" class="gyro-btn">FB</a>
+                <a href="#" class="gyro-btn">PugJS</a>
+                <a href="#" class="gyro-btn">NodeJS</a>
+            </div>
+            <div class="gyro-btns gyro-ring3-btns">
+                <a href="#" class="gyro-btn">AI/ML</a>
+                <a href="#" class="gyro-btn">Data</a>
+                <a href="#" class="gyro-btn">API</a>
+                <a href="#" class="gyro-btn">Crypto</a>
+            </div>
+            <div class="gyro-btns gyro-ring4-btns">
+                <a href="#" class="gyro-btn">HTML</a>
+                <a href="#" class="gyro-btn">CSS</a>
+                <a href="#" class="gyro-btn">JS</a>
+            </div>
         </div>
-        <div class="gyro-btns gyro-ring2-btns">
-            <a href="#" class="gyro-btn">Go</a>
-            <a href="#" class="gyro-btn">React</a>
-            <a href="#" class="gyro-btn">Ang.</a>
-            <a href="#" class="gyro-btn">FB</a>
-            <a href="#" class="gyro-btn">PugJS</a>
-            <a href="#" class="gyro-btn">NodeJS</a>
+        <div class="missile-container">
+            <img src="images/brahmos.png" alt="" class="missile">
+            <img src="images/brahmos.png" alt="" class="missile">
         </div>
-        <div class="gyro-btns gyro-ring3-btns">
-            <a href="#" class="gyro-btn">AI/ML</a>
-            <a href="#" class="gyro-btn">Data</a>
-            <a href="#" class="gyro-btn">API</a>
-            <a href="#" class="gyro-btn">Crypto</a>
-        </div>
-        <div class="gyro-btns gyro-ring4-btns">
-            <a href="#" class="gyro-btn">HTML</a>
-            <a href="#" class="gyro-btn">CSS</a>
-            <a href="#" class="gyro-btn">JS</a>
-        </div>
-
     </section>
+
+    <section id="extras-section">
+        <div class="extra-item">
+            <div class="title">
+                E-Training
+            </div>
+            <img src="images/arrow.png" class="bow-arrow">
+            <div class="slider-container">
+                <div class="slider">
+                    <img src="images/1.jpg" alt="">
+                    <img src="images/2.jpg" alt="">
+                    <img src="images/3.jpg" alt="">
+                    <img src="images/4.jpg" alt="">
+                    <img src="images/5.jpg" alt="">
+                </div>
+                <div class="indicators">
+                    <span class="active-indicator"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <ul>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Amet corporis dolores distinctio
+                    temporibus.</li>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Vero illum laborum repellat inventore quos
+                    temporibus.</li>
+            </ul>
+        </div>
+        <div class="extra-item">
+            <div class="title">
+                Knowledge Portal
+            </div>
+            <img src="images/arrow.png" class="bow-arrow">
+            <div class="slider-container">
+                <div class="slider">
+                    <img src="images/1.jpg" alt="">
+                    <img src="images/2.jpg" alt="">
+                    <img src="images/3.jpg" alt="">
+                    <img src="images/4.jpg" alt="">
+                    <img src="images/5.jpg" alt="">
+                </div>
+                <div class="indicators">
+                    <span class="active-indicator"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <ul>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Amet corporis dolores distinctio
+                    temporibus.</li>
+                <li><img src="images/jet-icon.png" class="jet-bullet-icon">Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Vero illum laborum repellat inventore quos
+                    temporibus.</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-top">
+            <h1>Something you can write here like a slogan or so ...</h1>
+            <img src="logo.png" alt="Logo">
+        </div>
+        <div class="footer-articles">
+            <article>
+                <h2>Mission</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quibusdam quam vero tenetur quia iusto
+                    ex!</p>
+            </article>
+            <article>
+                <h2>Integrity</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quibusdam quam vero tenetur quia iusto
+                    ex!</p>
+            </article>
+            <article>
+                <h2>Excellence</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quibusdam quam vero tenetur quia iusto
+                    ex!</p>
+            </article>
+        </div>
+    </footer>
 
     <!-- Javascript -->
     <script>
